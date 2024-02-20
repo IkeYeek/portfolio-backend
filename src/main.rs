@@ -1,3 +1,5 @@
+mod helpers;
+
 use std::borrow::Cow;
 use std::net::SocketAddr;
 
@@ -9,17 +11,7 @@ use hyper::{body::Body, Method, Request, Response, StatusCode};
 use hyper_util::rt::TokioIo;
 use tokio::net::TcpListener;
 use url_encoded_data::UrlEncodedData;
-
-fn empty() -> BoxBody<Bytes, hyper::Error> {
-    Empty::<Bytes>::new()
-        .map_err(|never| match never {})
-        .boxed()
-}
-fn full<T: Into<Bytes>>(chunk: T) -> BoxBody<Bytes, hyper::Error> {
-    Full::new(chunk.into())
-        .map_err(|never| match never {})
-        .boxed()
-}
+use crate::helpers::{empty, forge_res, full};
 
 #[derive(Debug)]
 struct Contact<'a> {
@@ -27,12 +19,6 @@ struct Contact<'a> {
     email: &'a str,
     object: &'a str,
     message: &'a str,
-}
-
-fn forge_res(msg: &str, status_code: StatusCode) -> Response<BoxBody<Bytes, hyper::Error>> {
-    let mut resp = Response::new(full(msg));
-    *resp.status_mut() = status_code;
-    return resp;
 }
 
 async fn handle_contact(
@@ -73,7 +59,7 @@ async fn handle_contact(
                         message,
                     };
                     println!("{contact:?}");
-                    Ok(Response::new(full("Ok.")))
+                    Ok(Response::new(empty()))
                 }
                 _ => return Ok(forge_res("Bad request.", StatusCode::BAD_REQUEST)),
             }
