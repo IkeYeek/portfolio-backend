@@ -1,7 +1,7 @@
 use http_body_util::combinators::BoxBody;
 use http_body_util::{BodyExt, Empty, Full};
-use hyper::{Response, StatusCode};
 use hyper::body::Bytes;
+use hyper::{Response, StatusCode};
 
 pub(crate) fn empty() -> BoxBody<Bytes, hyper::Error> {
     Empty::<Bytes>::new()

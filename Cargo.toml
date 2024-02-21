@@ -12,3 +12,4 @@ http-body-util = "0.1"
 hyper-util = { version = "0.1", features = ["full"] }
 url_encoded_data = "0.6.1"
 reqwest = { version = "0.11.24", features = ["blocking", "hyper-tls"]}
+html-escape = "0.2.13"
