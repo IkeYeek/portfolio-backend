@@ -163,8 +163,11 @@ async fn handle_request(
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
+    let port_env = env::var("PORT");
+    let port = port_env.unwrap_or_else(|_| String::from("3000")).parse::<u16>().unwrap_or_else(|_| 3000);
+    let addr = SocketAddr::from(([0, 0, 0, 0], port));
     let listener = TcpListener::bind(addr).await?;
+    println!("Running on port {port}");
     loop {
         let (stream, _) = listener.accept().await?;
         let io = TokioIo::new(stream);

@@ -30,18 +30,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
 
 [[package]]
-name = "backend-contact-form"
-version = "0.1.0"
-dependencies = [
- "http-body-util",
- "hyper 1.1.0",
- "hyper-util",
- "reqwest",
- "tokio",
- "url_encoded_data",
-]
-
-[[package]]
 name = "backtrace"
 version = "0.3.69"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -687,6 +675,18 @@ name = "pkg-config"
 version = "0.3.30"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d231b230927b5e4ad203db57bbcbee2802f6bce620b1e4a9024a07d94e2907ec"
+
+[[package]]
+name = "portfolio-backend"
+version = "0.1.0"
+dependencies = [
+ "http-body-util",
+ "hyper 1.1.0",
+ "hyper-util",
+ "reqwest",
+ "tokio",
+ "url_encoded_data",
+]
 
 [[package]]
 name = "proc-macro2"
