@@ -25,7 +25,7 @@ struct Contact<'a> {
 
 async fn insert_contact(contact: Contact<'_>) -> Result<(), String> {
     let key = env::var("NOTION_API_KEY").map_err(|err|err.to_string())?;
-    let page_id = env::var("CONTACT_DATABASE_ID").map_err(|err|err.to_string())?;//"ca1d7dea-c8b7-4975-9ce2-083858b8eb10";
+    let page_id = env::var("CONTACT_DATABASE_ID").map_err(|err|err.to_string())?;;
     let json_payload = format!(r#"{{
     "parent": {{
         "type": "database_id",
