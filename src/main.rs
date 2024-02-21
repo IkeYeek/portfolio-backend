@@ -124,10 +124,10 @@ async fn handle_contact(
                         object,
                         message,
                     };
-                    let mut res = Response::new(empty());
-                    res.headers_mut().insert("Access-Control-Allow-Origin", "https://ike.icu".parse().unwrap());
+                    let response = Response::builder().status(200).header("Access-Control-Allow-Origin", "https://ike.icu").body(empty()).map_err(|err| err.to_string())?;
+
                     match insert_contact(contact).await {
-                        Ok(()) => Ok(res),
+                        Ok(()) => Ok(response),
                         Err(e) => {
                             eprintln!("[crash] Unknown error - {e:?}");
                             Ok(forge_res("Internal server error", StatusCode::INTERNAL_SERVER_ERROR))
